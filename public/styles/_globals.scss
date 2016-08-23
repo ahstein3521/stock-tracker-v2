@@ -1,0 +1,44 @@
+body{
+	background:#f7f7f7;
+	text-align:center;
+	font-family: 'Baloo Paaji', cursive;
+}
+
+nav{
+	padding:5px;
+	background:#3d2929;
+	color:white;
+	form{
+		width: 70%;
+		margin: 0 auto;
+		.input-group{
+			width:50%;
+			margin:0 auto;
+			input[type='text']{
+				width:80%;
+				border-radius:5px;
+				color:darken(#ff7373,60%);
+			}
+			input[type='submit']{
+				background:#ff7373;
+				color:white;
+				border-style:inset;
+				border-color:darken(#ff7373,40%)
+			}
+		}	
+	}
+}
+.chart{
+
+	width:90%;
+	margin:0 auto;
+}
+
+.cards{
+	display:flex;
+	justify-content:space-between;
+	.card{
+		background:green;
+		color:red;
+	}
+}
