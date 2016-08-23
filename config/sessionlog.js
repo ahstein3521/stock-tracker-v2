@@ -27,9 +27,10 @@ exports.initial=function(callback){
 		data.forEach((v,i)=>{
 			
 			yahooFinance(v.symbol,function(err,result){
-				if(err) return callback(err);
+				
 				stocks[v.symbol]=result;
 				if(i==data.length-1) return callback(null,stocks)
+				
 			})
 		})	
 	})

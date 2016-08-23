@@ -1,13 +1,4 @@
-
-$(function(){
-	$('form').submit(function(e){
-		e.preventDefault();
-		var symbol=$("input[type='text']").val();
-		if(!symbol) return;
-		socket.emit("fetch",symbol)
-		$("input[type='text']").val("")
-	})
-	
+$(function(){	
 	socket.on("initialize",function(data){
 		stocks=data.stocks;
 		
@@ -16,15 +7,12 @@ $(function(){
 		renderChart();
 	})
 
-	
-
-	socket.on("new user",function(data){
-		displayNumOfConnections(data.connections)
-	})
-
 	socket.on("result",function(data){
 		var chart = $('.chart').highcharts();		
-		if(data.result.length){
+		console.log(data)
+		if(data.error || !data.result){
+			return alert("Couldn't Fetch "+data.symbol)
+		}else{
 			stocks[data.symbol]=data.result;
 			addDataCard(data.result);
 			chart.addSeries({

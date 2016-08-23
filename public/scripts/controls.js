@@ -27,10 +27,6 @@ function format(data){
 	return data.map(v=>{return [Date.parse(v.date),v.close]});
 }
 
-function displayNumOfConnections(num){
-	$(".header h4 span").text(num);
-}
-
 function addDataCard(data){
 	data=data.pop();
 	var str="<div class='card'><div class='close' id='"+data.symbol.toUpperCase()+"'>X</div></p><strong>"+data.symbol.toUpperCase()+"</strong></p>"+

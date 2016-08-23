@@ -18,8 +18,6 @@ app.get("/",function(req,res){
 	res.sendFile(__dirname+"/index.html")
 })
 
-
-
 io.attach(server)
 
 var connections=0;
@@ -45,11 +43,12 @@ io.sockets.on('connection',function(socket){
 
 	socket.on("fetch",function(_symbol){
 		yahooFinance(_symbol,function(err,data){
-			db.save(_symbol)
-			stocks[_symbol.toUpperCase()]=data;
-			io.sockets.emit("result",{result:data,symbol:_symbol})
-			
-		});
+			if(!err){
+				db.save(_symbol)
+				stocks[_symbol.toUpperCase()]=data;
+			}
+				io.sockets.emit("result",{result:data,symbol:_symbol,error:err})
+		})
 	})
 	socket.on("remove item",function(data){
 		delete stocks[data.symbol];

@@ -13,7 +13,7 @@ module.exports=function(symbol,cb){
 		from: _from,
 		  to: _to,
 		}, function (err, quotes) {
-		 if(err) return cb(err);
+		 if(err||!quotes.length) return cb(err);
 
 		 return cb(null,quotes);
 	})
