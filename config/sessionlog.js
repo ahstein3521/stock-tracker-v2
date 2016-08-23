@@ -1,4 +1,5 @@
 var Stocks=require("../models/stocks")
+var yahooFinance=require("./yahooFinance")
 
 exports.save=function(_symbol){
  	var stock=new Stocks({symbol:_symbol})
@@ -6,8 +7,30 @@ exports.save=function(_symbol){
 }
 
 exports.remove=function(id,callback){
-	Stocks.findByIdAndRemove({_id:id},function(err){
+	Stocks.remove({symbol:id},function(err,data){
+		if(err){ return callback(err)}
+	    return callback(null)
+	})
+}
+
+exports.show=function(callback){
+	Stocks.find({},function(err,data){
+		return callback(data)
+	})
+}
+
+exports.initial=function(callback){
+	
+	Stocks.find({},function(err,data){
 		if(err) return callback(err);
-		return callback();
+		 var stocks={}
+		data.forEach((v,i)=>{
+			
+			yahooFinance(v.symbol,function(err,result){
+				if(err) return callback(err);
+				stocks[v.symbol]=result;
+				if(i==data.length-1) return callback(null,stocks)
+			})
+		})	
 	})
 }

@@ -16,6 +16,8 @@ $(function(){
 		renderChart();
 	})
 
+	
+
 	socket.on("new user",function(data){
 		displayNumOfConnections(data.connections)
 	})

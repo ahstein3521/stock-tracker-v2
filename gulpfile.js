@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var uglify=require("gulp-uglify");
 var concat=require("gulp-concat");
 var nodemon = require('gulp-nodemon');
-var minify=require('gulp-minify-css');
 var autoprefixer=require('gulp-autoprefixer')
 var plumber=require("gulp-plumber");
 var sourcemaps=require("gulp-sourcemaps")

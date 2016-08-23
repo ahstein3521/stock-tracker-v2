@@ -29,16 +29,28 @@ nav{
 	}
 }
 .chart{
-
 	width:90%;
-	margin:0 auto;
+	margin:20px auto;
 }
 
 .cards{
 	display:flex;
-	justify-content:space-between;
+	justify-content:space-around;
+	flew-flow:row-wrap;
 	.card{
-		background:green;
-		color:red;
+		min-width:50px;
+		padding:5px;
+		background:lighten(#3d2929,10%);
+		color:white;
+		box-shadow:2px 4px 5px rgba(0,0,0,0.6);
+		border-radius:5px;
+		p strong{
+			color:#f7f7f7;
+			text-shadow: 2px 4px 2px black;
+		}
+		&:hover{
+			background:lighten(#3d2929,40%);
+			box-shadow:-2px 4px 5px rgba(0,0,0,0.6);
+		}
 	}
 }
