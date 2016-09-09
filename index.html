@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">	
 	<link rel="stylesheet" type="text/css" href="public/dist/styles.css">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
@@ -13,23 +14,24 @@
 <body>
 	 <nav class='navbar-fixed'>
 		<div class="container-fluid">
-		<p class="pull-left logo"><strong>Stock Stalker</strong></p>
-		<form>
-			<div class="input-group">
-				<input type="text">
-				<input type="submit" value="Search">
-			</div>	
-		</form>
-		</div>
+			<div class="navbar-header">
+				<div class="navbar-brand">
+					<strong>Stock Stalker</strong>
+				</div>
+			</div>
+			<ul class="navbar-right nav navbar-nav hidden-sm hidden-xs">
+				<li><p class="navbar-text">Current connections: <span class="connections">0</span></p></li>
+			</ul>
+		</div>		
 	</nav>
-	<div class='header'>
-		
-		<!-- <h4>Currently <span>0</span> connections</h4> -->
-	</div>	
 	<div class="chart"></div>
-	<div class='container'>
-		<div class="cards"></div>
-	</div>
+	<form class="form-search">
+		<label for="search-stock">Find a Stock by it's Symbol:</label>
+		<div class="input-group">
+			<input type="text" id="search-stock">
+			<input type="submit" value="Search">
+		</div>	
+	</form>
  	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script> 
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>	

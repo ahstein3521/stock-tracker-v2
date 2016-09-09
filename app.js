@@ -21,33 +21,37 @@ app.get("/",function(req,res){
 io.attach(server)
 
 var connections=0;
-var stocks={};//global serverside object
+var stocks=null;//global obj to keep track of state
 
 io.sockets.on('connection',function(socket){
+	connections+=1;
 	
-	if(connections==0){
+	if(connections==1 && !stocks){
 		db.initial(function(err,data){
 			if(!err){
 				stocks=data;
+				socket.emit("initialize",{stocks:stocks})
 			}
 		})
 	}	
-	
+		
 	socket.emit("initialize",{stocks:stocks})
 	
-	connections+=1;	
 	
+	io.sockets.emit("display connections",{connections:connections})
 	socket.once('disconnect',function(){
 		connections-=1;
+		io.sockets.emit("display connections",{connections:connections})
 	})
 
 	socket.on("fetch",function(_symbol){
-		yahooFinance(_symbol,function(err,data){
+		var symbol=_symbol.toUpperCase();
+		yahooFinance(symbol,function(err,data){
 			if(!err){
-				db.save(_symbol)
-				stocks[_symbol.toUpperCase()]=data;
+				db.save(symbol)
+				stocks[symbol]=data;
 			}
-				io.sockets.emit("result",{result:data,symbol:_symbol,error:err})
+				io.sockets.emit("result",{result:data,symbol:symbol,error:err})
 		})
 	})
 	socket.on("remove item",function(data){

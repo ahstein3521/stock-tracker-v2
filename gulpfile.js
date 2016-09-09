@@ -28,12 +28,18 @@ gulp.task("scripts",function(){
 			   .pipe(gulp.dest("public/dist"))
 })
 
+gulp.task("scriptss",function(){
+	return gulp.src("public/dist/main.js")
+			   .pipe(uglify())
+			   .pipe(gulp.dest("public/dist"))
+})
+
 gulp.task('start', function () {
      
   nodemon({
     script: 'app.js'
   , ext: 'js html scss'
   , env: { 'NODE_ENV': 'development' },
-  tasks:["styles"]
+  tasks:["styles","scripts"]
   })    
 });

@@ -1,5 +1,6 @@
 function renderChart(){
-	$(".chart").highcharts('StockChart',{
+    if(!stocks) return;
+    $(".chart").highcharts('StockChart',{
         yAxis: {
             labels: {
                 formatter: function () {
@@ -12,12 +13,22 @@ function renderChart(){
                 color: 'silver'
             }]
         },
+        legend: {
+            enabled: true,
+            align: 'bottom',
+            backgroundColor: '#FCFFC5',
+            borderColor: "rgb(161, 171, 66)",
+            borderWidth: 2,
+            verticalAlign: 'bottom',
+            shadow:true
+        },       
         credits: {
             enabled: false
         },
         plotOptions: {
             series: {
-                compare: 'percent'
+                compare: 'percent',
+                events:{legendItemClick:handleDelete}
             }
         },
         tooltip: {
@@ -26,7 +37,7 @@ function renderChart(){
         },
 
         series: Object.keys(stocks).map(function(v){
-        	return {name:v,data:format(stocks[v])}
+            return {name:v,data:format(stocks[v])}
         })
-	})
+    })
 }
